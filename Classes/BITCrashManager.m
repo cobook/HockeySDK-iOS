@@ -569,6 +569,10 @@ NSString *const kBITCrashManagerStatus = @"BITCrashManagerStatus";
       NSString *installString = bit_appAnonID() ?: @"";
       NSString *crashLogString = [BITCrashReportTextFormatter stringValueForCrashReport:report crashReporterKey:installString];
       
+      if (self.delegate != nil && [self.delegate respondsToSelector:@selector(crashManager:didFindCrash:)]) {
+        [self.delegate crashManager:self didFindCrash:crashLogString];
+      }
+      
       if ([report.applicationInfo.applicationVersion compare:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]] == NSOrderedSame) {
         _crashIdenticalCurrentVersion = YES;
       }
