@@ -534,6 +534,10 @@
       }
       NSString *crashLogString = [BITCrashReportTextFormatter stringValueForCrashReport:report];
       
+      if (self.delegate != nil && [self.delegate respondsToSelector:@selector(crashManager:didFindCrash:)]) {
+        [self.delegate crashManager:self didFindCrash:crashLogString];
+      }
+      
       if ([report.applicationInfo.applicationVersion compare:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]] == NSOrderedSame) {
         _crashIdenticalCurrentVersion = YES;
       }

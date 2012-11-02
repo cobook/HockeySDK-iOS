@@ -107,6 +107,8 @@
 /// @name Networking
 ///-----------------------------------------------------------------------------
 
+- (void)crashManager:(BITCrashManager *)crashManager didFindCrash:(NSString *)crash;
+
 /** Invoked right before sending crash reports will start
  
  @param crashManager The `BITCrashManager` instance invoking this delegate
